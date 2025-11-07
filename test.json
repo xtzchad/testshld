@@ -1,0 +1,26 @@
+{
+    "name": "zzz'\"<p>",
+    "description": "zzz'\"<p>",
+    "tags": ["zzz'\"<p>", "nfts", "illustrations", "art", "design", "gif", "hicetnunc", "hen", "xtz", "tezos", "#tezos", "#CleanNFTs", "#1of1", "#1of1xtz", "objkt"],
+    "symbol": "zzz'\"<p>",
+    "artifactUri": "https://xtzchad.github.io/testshld/test1.svg",
+    "displayUri": "https://xtzchad.github.io/testshld/test1.svg",
+    "thumbnailUri": "https://xtzchad.github.io/testshld/test1.svg",
+    "creators": ["tz1U5xKWbH99a2RYuGed29s7iomzfdBfqcgW"],
+    "formats": [{
+            "mimeType": "image/gif",
+            "fileSize": 1520209,
+            "fileName": "631.gif",
+            "dimensions": {
+                "value": "1000x1000",
+                "unit": "px"
+            },
+            "uri": "https://xtzchad.github.io/testshld/test1.svg"
+        }
+    ],
+    "decimals": 0,
+    "isBooleanAmount": false,
+    "shouldPreferSymbol": false,
+    "date": "2025-11-07T08:30:26.578Z",
+    "mintingTool": "zzz'\"<p>"
+}
